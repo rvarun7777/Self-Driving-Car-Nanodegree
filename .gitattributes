@@ -16,3 +16,5 @@
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
 *.pickle filter=lfs diff=lfs merge=lfs -text
+*.p filter=lfs diff=lfs merge=lfs -text
+*.data-00000-of-00001 filter=lfs diff=lfs merge=lfs -text
