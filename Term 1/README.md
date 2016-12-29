@@ -1,8 +1,8 @@
-# [Udacity Self Driving Car Engineer]
+# Self Driving Car Engineer
 
 ![ScreenShot](Term1.PNG)
 
-This repository contains all the projects which have been completed by me for the [Self Driving Car Nanodegree] offered by [Udacity](https://www.udacity.com). The [curriculum](https://medium.com/self-driving-cars/term-1-in-depth-on-udacitys-self-driving-car-curriculum-ffcf46af0c08#.nglkprlow) of this program consists of three terms over nine months. This repository will be updated accordingly. 
+This repository contains all the projects which have been completed by me for the Self Driving Car Nanodegree offered by [Udacity](https://www.udacity.com). The [curriculum](https://medium.com/self-driving-cars/term-1-in-depth-on-udacitys-self-driving-car-curriculum-ffcf46af0c08#.nglkprlow) of this program consists of three terms over nine months. This repository will be updated accordingly. 
 
 ## Term 1:  Computer Vision and Deep Learning
 
