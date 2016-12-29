@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>SAVER</title>
+<title>Traffic_Signs_Recognition</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -33821,10 +33821,27 @@ $</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <ul>
-<li>Features: Used normailization to keep the image pixel values between -1.0 and 1.0</li>
-<li>Labels: One-hot encoding.</li>
-<li>Images have not been converted to gray scale. Since color images will be usefulfor the classifier [Red warns the
-driver].</li>
+<li>Features: Used normailization to keep the image pixel values between -1.0 and 1.0<ul>
+<li>Why Normalization?
+Normalized data helps Gradient Descent (or similar algorithms) to converge quickly. Hence, data normalization is one 
+of the key preprocessing steps when it comes to data preprocessing. I experimented with preprocessing techniques 
+(namely, MinMax Scaling and Mean Normalization). But during the initial stage of the project, I found out that,
+MinMax Scaling works better than Mean Normalization for this dataset. Also Normalisation as opoosed to 
+Standardisation gives the higher validation and training accuracy for a feedforward network.</li>
+</ul>
+</li>
+<li>Labels: One-hot encoding.[One-Hot Encoding was used to convert label numbers to vectors]. </li>
+<li>Reason for not converting the image to grayscale:<ul>
+<li>Since color images will be useful for the classifier [Red warns the driver].Ex: Astop sign might be an upside-down
+red triangle, and knowing the colour of the triangle may help us predict the sign correctly. </li>
+</ul>
+</li>
+<li>Due to the con's of data reduction: <ul>
+<li>Processing only a single combined channel instead of three separate RGB channels reduces the amount of data to be 
+processed by about 1/3 and allows the algorithm to run faster. However, it comes at the cost of throwing away data
+(color data) that may be very helpful or required for many image processing applications.</li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -34213,8 +34230,12 @@ Step-by-step breakdown:</p>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>The structure of a convolutional neural network followed by fully connected layers is a standard approach for image recogniztion. In this way, we can capture all the information from convolution so that the position of the sign in the image matter less.</p>
-<p>The sizes of the neural networks as well as the hyperparameters are determined by trial and error. Need a good intuition on how to choose the parameters. Basically tried a lot of them and settled with the ones give me the best performance.</p>
+<ol>
+<li>At first,I tried to solve this problem using what I already learned from the lessons (fully connected neural network with dropouts, regularization, learning rate decay) and tuned the hyperparameters. This already depicts in the comments which have been made in my architecture. I also believe that the structure of a convolutional neural network followed by fully connected layers is a standard approach for image recogniztion.In this way, we can capture all the information from convolution so that the position of the sign in the image matter less.The best accuracy which I obtained was around 75%.</li>
+<li>Then tried a simple convolutional neural network with two conv layers and started tuning the hyperparameters. The best accuracy I could get was 86%.</li>
+<li>I then started looking up further on how to optimize the conv net by reading some articles like <a href="http://datascience.stackexchange.com/questions/410/choosing-a-learning-rate?newreg=652aef31a20b4b0a93c7630f09c65094">Choosing Learning Rate</a>.It did involve a lot of trail and error.Basically tried a lot of them and settled with the ones give me the best performance.</li>
+<li>I wasn't able to implement all these techniques as the model takes a really long time to run on my machine. Finally, when I was ready to test my final architecture my model was too slow on a CPU where I obtained only one epoch and the system used to freeze.It had to be ran on a GPU.Used the Amazon Web Services and ran the code on NVIDIA GeForce 6600 GT.</li>
+</ol>
 
 </div>
 </div>
@@ -50192,9 +50213,23 @@ Test accuracy: 0.800000
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong>
-My model predicted correctly for 4 out of 5 images from the internet (accuracy = 80%).
-My neural network did well for the signs which have a significant number of samples (such as "speed" and "ahead only") in the training data. However, for the signs have a small number of samples in the training data ("slippery road"), it does pretty terrible. But still it predicted a 11.3% probability :)</p>
+<p><strong>Answer:</strong></p>
+<ul>
+<li>The model performs pretty well on these new images as well which shows that it is able to generalize.</li>
+<li>Original test accuracy on the test data set provided was about 92%</li>
+<li>My model predicted correctly for 4 out of 5 images from the internet (accuracy = 80%).</li>
+<li>Since I didn't generate additional jittered data, there is a huge imbalance in the dataset. As a result, my neural
+network did well for the signs have a significant number of samples (such as "speed" and "ahead only")
+in the training data. However, for the signs have a small number of samples in the training data ("slippery road"), it
+does pretty terrible. But still it predicted a 11.3% probability :)<ul>
+<li>Future work: <ul>
+<li>Generate jittered data to balance it.</li>
+<li>Data Augumentation.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
 </div>
 </div>
