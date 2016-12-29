@@ -8,9 +8,10 @@ We'll use two datasets in this lab:
 2. Cifar10
 
 Download datasets:
-[VGG Bottleneck Features 100](https://drive.google.com/open?id=0B8b_JkA6vaFrQnByYkhKVlJDMTA)
-[ResNet Bottleneck Features 100] (https://drive.google.com/open?id=0B8b_JkA6vaFremc3V2JPTENqMmc)
-[InceptionV3 Bottleneck Features 100](https://drive.google.com/open?id=0B8b_JkA6vaFrMFlTZTJvZGZ3Q2c)
+
+1. [VGG Bottleneck Features 100](https://drive.google.com/open?id=0B8b_JkA6vaFrQnByYkhKVlJDMTA)
+2. [ResNet Bottleneck Features 100] (https://drive.google.com/open?id=0B8b_JkA6vaFremc3V2JPTENqMmc)
+3. [InceptionV3 Bottleneck Features 100](https://drive.google.com/open?id=0B8b_JkA6vaFrMFlTZTJvZGZ3Q2c)
 
 Unless you have a powerful GPU, running feature extraction on these models will take a significant amount of time. To make things we precomputed **bottleneck features** for each (network, dataset) pair, this will allow you experiment with feature extraction even on a modest CPU. You can think of bottleneck features as feature extraction but with caching.  Because the base network weights are frozen during feature extraction, the output for an image will always be the same. Thus, once the image has already been passed once through the network we can cache and reuse the output.
 
