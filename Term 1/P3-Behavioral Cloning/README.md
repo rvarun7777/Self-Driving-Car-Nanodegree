@@ -75,7 +75,6 @@ Finally, the image is resized to the expected model input size of 64x32.
 
     steering angle -0.007274489
 
-<<<<<<< HEAD
 ![png](2.png)
 =======
 
