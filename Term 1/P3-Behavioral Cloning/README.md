@@ -3,10 +3,12 @@
 
 ## Model
 
-### Code
-Note that the code not directly related to defining and training the model in `model.py` has been modularized and extracted into separate Python files. For example, a Python generator inheriting from the parent class of Keras' ImageDataGenerator is implemented in `dataframe_iterator.py`.
+### Code [Multiple Files]
+The code is not directly related to defining and training the model in `model.py` has been modularized and extracted into separate Python files. For example, a Python generator inheriting from the parent class of Keras' ImageDataGenerator is implemented in `dataframe_iterator.py`.
 
 ### Architecture
+CNNs architectures have been successfully used to predict the steering angle of the simulator. 
+Among these are the CNN architecture of NVIDIA https://arxiv.org/pdf/1604.07316v1.pdf or the comma.ai architecture.
 Because Comma.ai's success has been proven in the real-world, their open source steering model (https://github.com/commaai/research/blob/master/train_steering_model.py) was used in this project. However, instead of their initial Lambda layer, which only mean-centers the images, a batchnorm layer is used for input data normalization.
 
 #### Input Image Size
@@ -16,7 +18,7 @@ Because Comma.ai's success has been proven in the real-world, their open source 
 One notable characteristic of the Comma.ai model, besides its simplicity, is the use of ELU's instead of the popular ReLU's. The benefits of ELU's over ReLU's have been published in https://arxiv.org/pdf/1511.07289v1.pdf
 
 #### No Pooling
-As mentioned in https://medium.com/@ksakmann/behavioral-cloning-make-a-car-drive-like-yourself-dc6021152713#.tlhopk40h, there are no pooling layers because they help with translation invariance. However, we need to adjust the steering angle proportional to horizontal translation.
+No pooling layers because they help with translation invariance. However, we need to adjust the steering angle proportional to horizontal translation.
 
 #### Summary
 One can easily see the details of the layers from the source code, but the model contains:
@@ -37,9 +39,6 @@ The predicted steering angle is output from single dense layer of size 1 without
 Adam with Nesterov momentum (i.e., "Nadam" in Keras) was used. The benefits of Nadam compared to Adam are discussed in the paper linked in Keras' documentation -- http://cs229.stanford.edu/proj2015/054_report.pdf
 
 ## Data Generation & Collection
-
-### Joystick
-Because other people reported better results with video game controllers instead of the keyboard, the Speedlink O.Z. Racing Wheel controller (http://www.speedlink.com/?p=2&cat=4329&pid=27305&paus=1) was used for this project.
 
 ### Simulator Settings
 * Only race track 1 was used to generate training data
@@ -66,7 +65,7 @@ for directory in parent_directories:
 
 
 ### Augmentation of Images
-As noted in https://medium.com/@ksakmann/behavioral-cloning-make-a-car-drive-like-yourself-dc6021152713#.tlhopk40h, the steering angles in this project's generated dataset are also biased towards zero. But, the distribution of left/right steering is more balanced due to driving both clockwise and counter-clockwise on the track:
+The steering angles in this project's generated dataset are also biased towards zero. But, the distribution of left/right steering is more balanced due to driving both clockwise and counter-clockwise on the track:
 
 
 ```python
@@ -163,7 +162,7 @@ plt.imshow(img)
 
 ## Training/Validation/Testing
 
-* Model was trained for 8 epochs
+* Model was trained for 10 epochs
 * Mean square error of the predicted steering angle was the loss function that the model was evaluated on.
 * Using Keras' Model Checkpoint, the model weights are auto-saved after an epoch if validation loss improved over the previous best validation loss. The model weight filename includes the epoch number.
 * Each model weight file is loaded and **tested** against the simulator, and not a separate set of test images, for evaluation. As other people have reported, the model weights with the lowest training or validation loss doesn't necessarily perform the best on the race track.
@@ -179,5 +178,3 @@ Recommended settings: 640x480, fastest
 * throttle has been changed to a constant of 0.1, which is slow enough for the model to keep the vehicle driving within lane boundaries. The vehicle doesn't drive perfectly on the center line on the relatively sharp turn section after the bridge, despite the slow, careful driving done to generate the training data. Perhaps adding the shearing image augmentation mentioned in https://medium.com/@ksakmann/behavioral-cloning-make-a-car-drive-like-yourself-dc6021152713#.tlhopk40h would help. Another future extention to the model would be to have an additional output for throttle...
 
 When run in the highest screen resolution and quality settings, there is a noticeable lag in the responsiveness of the vehicle's deep neural network model to generate a steering angle prediction. One can imagine that real world autonomous vehicle engineers must optimize their hardware and software to make safety-critical decisions as fast as possible...
-
-Race track 2 not yet supported.
