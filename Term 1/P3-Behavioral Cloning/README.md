@@ -77,13 +77,6 @@ Finally, the image is resized to the expected model input size of 64x32.
 ![png](output_14_1.png)
 
 
-#### Example Augmentations
-
-    translated steering angle 0.0261531866729
-
-![png](output_16_2.png)
-
-
 ## Training/Validation/Testing
 
 * Model was trained for 10 epochs
@@ -99,6 +92,6 @@ Recommended settings: 640x480, fastest
 `drive.py` changes:
 * `cropout_sky_hood()`, previously mentioned in the "Augmentation of Images" subsection, is applied here in order to closely match the images that the model was trained on
 * image resized to the model's expected input shape
-* throttle has been changed to a constant of 0.1, which is slow enough for the model to keep the vehicle driving within lane boundaries. The vehicle doesn't drive perfectly on the center line on the relatively sharp turn section after the bridge, despite the slow, careful driving done to generate the training data. Perhaps adding the shearing image augmentation mentioned in https://medium.com/@ksakmann/behavioral-cloning-make-a-car-drive-like-yourself-dc6021152713#.tlhopk40h would help. Another future extention to the model would be to have an additional output for throttle...
+* throttle has been changed to a constant of 0.1, which is slow enough for the model to keep the vehicle driving within lane boundaries. The vehicle doesn't drive perfectly on the center line on the relatively sharp turn section after the bridge, despite the slow, careful driving done to generate the training data. Perhaps adding the shearing image augmentation mentioned would help. Another future extention to the model would be to have an additional output for throttle...
 
 When run in the highest screen resolution and quality settings, there is a noticeable lag in the responsiveness of the vehicle's deep neural network model to generate a steering angle prediction. One can imagine that real world autonomous vehicle engineers must optimize their hardware and software to make safety-critical decisions as fast as possible...
