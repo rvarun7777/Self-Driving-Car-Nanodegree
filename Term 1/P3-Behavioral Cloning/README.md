@@ -59,11 +59,6 @@ Below are the number of images generated with slow, centerline driving on the 50
 ### Augmentation of Images
 The steering angles in this project's generated dataset are also biased towards zero. But, the distribution of left/right steering is more balanced due to driving both clockwise and counter-clockwise on the track:
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x7fd2a4124d30>
-
-
-
-
 ![png](output_11_1.png)
 
 
@@ -77,62 +72,14 @@ Finally, the image is resized to the expected model input size of 64x32.
 
 #### Example Left, Center, Right Images
 
-
-```python
-import pandas as pd
-from training_validation import column_names
-from PIL import Image
-import matplotlib.pyplot as plt
-
-training_samples = pd.read_csv(parent_directories[0] + '/driving_log.csv', header=None, names=column_names, low_memory=False)
-test_sample =  training_samples.sample(1).iloc[0]
-center_img_filepath = test_sample['center_image'].strip()
-left_img_filepath = test_sample['left_image'].strip()
-right_img_filepath = test_sample['right_image'].strip()
-steering_angle = test_sample['steering_angle']
-print('steering angle', steering_angle)
-filepaths = [left_img_filepath, center_img_filepath, right_img_filepath]
-fig = plt.figure(figsize=(12, 6))
-filepaths_count = len(filepaths)
-rows = 1
-for i in range(filepaths_count):
-    sp = fig.add_subplot(rows, filepaths_count//rows, i+1)
-    img = Image.open(filepaths[i])
-    plt.imshow(img)
-```
-
     steering angle -0.007274489
-
-
 
 ![png](output_14_1.png)
 
 
 #### Example Augmentations
 
-
-```python
-from img_transformations import translate, brighten_or_darken, cropout_sky_hood
-
-img = Image.open(center_img_filepath)
-img = brighten_or_darken(img, brightness_factor_min=0.25)
-img, steering_angle = translate(img, steering_angle)
-img = cropout_sky_hood(img)
-print('translated steering angle', steering_angle)
-img = img.resize((64, 32))
-plt.imshow(img)
-```
-
     translated steering angle 0.0261531866729
-
-
-
-
-
-    <matplotlib.image.AxesImage at 0x7fd298be87b8>
-
-
-
 
 ![png](output_16_2.png)
 
