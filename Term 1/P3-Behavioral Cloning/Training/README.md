@@ -41,7 +41,7 @@ steering_angles.plot.hist(bins=100, title="Most Frequent Steering Angles")
 ![png](1a.png)
 
 
-To generate an even greater variety of training data, random brightness changes and translations (both vertical and horizontal) were applied to images as described in https://medium.com/@ksakmann/behavioral-cloning-make-a-car-drive-like-yourself-dc6021152713#.tlhopk40h. However, the image augmentation functions were implemented with the Python Imaging Library (PIL) instead of OpenCV.
+To generate an even greater variety of training data, random brightness changes and translations (both vertical and horizontal) were applied to images.However, the image augmentation functions were implemented with the Python Imaging Library (PIL) instead of OpenCV.
 
 Additionally, the following were also implemented:
 * Cropping out a reasonable amount of the sky and hood of the car in order to ensure the model can "focus" on the most relevant parts of the image and learn to steer based on lane lines.
