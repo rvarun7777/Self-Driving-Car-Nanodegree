@@ -52,14 +52,6 @@ Images from all 3 simulated cameras (left, center, right) were used. A steering 
 
 Below are the number of images generated with slow, centerline driving on the 50 Hz simulator:
 
-
-```python
-from training_validation import parent_directories
-
-for directory in parent_directories:
-    !echo {directory} `ls -al {directory}/IMG | wc -l`
-```
-
     data/track1/forward/center 107058
     data/track1/backward/center 128763
 
@@ -90,7 +82,7 @@ steering_angles.plot.hist(bins=100, title="Most Frequent Steering Angles")
 ![png](output_11_1.png)
 
 
-To generate an even greater variety of training data, random brightness changes and translations (both vertical and horizontal) were applied to images as described in https://medium.com/@ksakmann/behavioral-cloning-make-a-car-drive-like-yourself-dc6021152713#.tlhopk40h. However, the image augmentation functions were implemented with the Python Imaging Library (PIL) instead of OpenCV.
+To generate an even greater variety of training data, random brightness changes and translations (both vertical and horizontal) were applied to images. However, the image augmentation functions were implemented with the Python Imaging Library (PIL) instead of OpenCV.
 
 Additionally, the following were also implemented:
 * Cropping out a reasonable amount of the sky and hood of the car in order to ensure the model can "focus" on the most relevant parts of the image and learn to steer based on lane lines.
