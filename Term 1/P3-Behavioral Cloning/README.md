@@ -59,7 +59,11 @@ Below are the number of images generated with slow, centerline driving on the 50
 ### Augmentation of Images
 The steering angles in this project's generated dataset are also biased towards zero. But, the distribution of left/right steering is more balanced due to driving both clockwise and counter-clockwise on the track:
 
+<<<<<<< HEAD
 ![png](1.png)
+=======
+![png](output_11_1.png)
+>>>>>>> origin/master
 
 
 To generate an even greater variety of training data, random brightness changes and translations (both vertical and horizontal) were applied to images. However, the image augmentation functions were implemented with the Python Imaging Library (PIL) instead of OpenCV.
@@ -74,7 +78,11 @@ Finally, the image is resized to the expected model input size of 64x32.
 
     steering angle -0.007274489
 
+<<<<<<< HEAD
 ![png](2.png)
+=======
+![png](output_14_1.png)
+>>>>>>> origin/master
 
 
 ## Training/Validation/Testing
