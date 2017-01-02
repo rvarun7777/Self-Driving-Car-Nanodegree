@@ -8,8 +8,8 @@ The code is not directly related to defining and training the model in `model.py
 
 ### Architecture
 CNNs architectures have been successfully used to predict the steering angle of the simulator. 
-Among these are the CNN architecture of [NVIDIA End-to-End Learning] (https://arxiv.org/pdf/1604.07316v1.pdf) or the [comma.ai] architecture.
-Because Comma.ai's success has been proven in the real-world, their open source steering model (https://github.com/commaai/research/blob/master/train_steering_model.py) was used in this project. However, instead of their initial Lambda layer, which only mean-centers the images, a batchnorm layer is used for input data normalization.
+Among these are the CNN architecture of [NVIDIA End-to-End Learning] (https://arxiv.org/pdf/1604.07316v1.pdf) or the [comma.ai] (https://github.com/commaai/research/blob/master/train_steering_model.py) architecture.
+Because Comma.ai's success has been proven in the real-world, their open source steering model was used in this project. However, instead of their initial Lambda layer, which only mean-centers the images, a batchnorm layer is used for input data normalization.
 
 #### Input Image Size
 64x32 was chosen to match the original aspect ratio. Keeping the original image size of 320x160 would significantly slow down model training. And, others have reported success with 64x64 images.
