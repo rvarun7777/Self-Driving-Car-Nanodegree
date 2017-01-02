@@ -94,6 +94,7 @@ Finally, the image is resized to the expected model input size of 64x32.
 * If the simulated car drives around track 1 continuously within the lane boundaries for several laps, a copy of the model weights file is saved as `model.h5`
 
 ## Simulation
+The files in the Simulation folder is required to run in the simulator.
 
 Recommended settings: 640x480, fastest
 
