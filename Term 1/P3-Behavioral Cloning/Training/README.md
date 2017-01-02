@@ -1,7 +1,7 @@
 
 # Behavioral Cloning
 
-## Model
+## Model Training
 
 ### Original Images & Steering Angle Adjustment
 Images from all 3 simulated cameras (left, center, right) were used. A steering angle adjustment of +/- 0.07 were added onto the steering angle when using the left/right images. The angle adjustment was derived empirically by trial and error of the model on the simulator. Higher and higher values resulted in zig-zag, oscillated driving.
@@ -35,14 +35,9 @@ steering_angles = training_samples['steering_angle']
 steering_angles.plot.hist(bins=100, title="Most Frequent Steering Angles")
 ```
 
-
-
-
     <matplotlib.axes._subplots.AxesSubplot at 0x7fd2a4124d30>
 
-
-
-
+	
 ![png](1a.png)
 
 
@@ -82,8 +77,6 @@ for i in range(filepaths_count):
 
     steering angle -0.007274489
 
-
-
 ![png](2a.png)
 
 
@@ -104,13 +97,7 @@ plt.imshow(img)
 
     translated steering angle 0.0261531866729
 
-
-
-
-
     <matplotlib.image.AxesImage at 0x7fd298be87b8>
-
-
 
 
 ![png](3a.png)
