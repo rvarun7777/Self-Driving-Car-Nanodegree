@@ -59,21 +59,6 @@ Below are the number of images generated with slow, centerline driving on the 50
 ### Augmentation of Images
 The steering angles in this project's generated dataset are also biased towards zero. But, the distribution of left/right steering is more balanced due to driving both clockwise and counter-clockwise on the track:
 
-
-```python
-%matplotlib inline
-
-from training_validation import build_dataframes
-
-training_samples, validation_samples = build_dataframes()
-
-steering_angles = training_samples['steering_angle']
-steering_angles.plot.hist(bins=100, title="Most Frequent Steering Angles")
-```
-
-
-
-
     <matplotlib.axes._subplots.AxesSubplot at 0x7fd2a4124d30>
 
 
