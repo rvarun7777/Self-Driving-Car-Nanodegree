@@ -15,7 +15,7 @@ Because Comma.ai's success has been proven in the real-world, their open source 
 64x32 was chosen to match the original aspect ratio. Keeping the original image size of 320x160 would significantly slow down model training. And, others have reported success with 64x64 images.
 
 #### Non-Linear Activation Layers
-One notable characteristic of the Comma.ai model, besides its simplicity, is the use of ELU's instead of the popular ReLU's. The benefits of ELU's over ReLU's have been published in the [FAST AND ACCURATE DEEP NETWORK LEARNING BY EXPONENTIAL LINEAR UNITS (ELUS] (https://arxiv.org/pdf/1511.07289v1.pdf).
+One notable characteristic of the Comma.ai model, besides its simplicity, is the use of ELU's instead of the popular ReLU's. The benefits of ELU's over ReLU's have been published in the [FAST AND ACCURATE DEEP NETWORK LEARNING BY EXPONENTIAL LINEAR UNITS (ELUS)] (https://arxiv.org/pdf/1511.07289v1.pdf).
 
 #### No Pooling
 No pooling layers because they help with translation invariance. However, we need to adjust the steering angle proportional to horizontal translation.
