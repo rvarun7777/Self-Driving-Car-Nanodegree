@@ -80,7 +80,7 @@ Finally, the image is resized to the expected model input size of 64x32.
 
 ## Training/Validation/Testing
 
-* Model was trained for 10 epochs
+* Model was trained for 8 epochs
 * Mean square error of the predicted steering angle was the loss function that the model was evaluated on.
 * Using Keras' Model Checkpoint, the model weights are auto-saved after an epoch if validation loss improved over the previous best validation loss. The model weight filename includes the epoch number.
 * Each model weight file is loaded and **tested** against the simulator, and not a separate set of test images, for evaluation. As other people have reported, the model weights with the lowest training or validation loss doesn't necessarily perform the best on the race track.
