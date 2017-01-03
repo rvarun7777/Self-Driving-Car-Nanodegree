@@ -1,0 +1,15 @@
+numpy: 					conda install -c conda-forge numpy=1.11.3
+
+flask-socketio 2.7.1:	conda install -c conda-forge flask-socketio=2.7.1
+
+eventlet 0.19.0:		conda install -c conda-forge eventlet=0.19.0
+
+pillow:					conda install -c conda-forge pillow=3.4.2
+
+h5py:					conda install -c conda-forge h5py=2.6.0 
+
+keras:					conda install -c jaikumarm keras=1.0.8 
+
+drive.py				https://drive.google.com/open?id=0B8b_JkA6vaFrcENFMHZ3MXl5RE0
+
+dataset:				https://drive.google.com/open?id=0B8b_JkA6vaFrNXJMU2FUR0NUUkE
