@@ -36,7 +36,7 @@ One can easily see the details of the layers from the source code, but the model
 The predicted steering angle is output from single dense layer of size 1 without an activation.
 
 ### Optimizer
-Adam with Nesterov momentum (i.e., "Nadam" in Keras) was used. The benefits of Nadam compared to Adam are discussed in the paper linked in Keras' documentation -- http://cs229.stanford.edu/proj2015/054_report.pdf
+Adam with Nesterov momentum (i.e., "Nadam" in Keras) was used. The benefits of Nadam compared to Adam are discussed in the [paper] (http://cs229.stanford.edu/proj2015/054_report.pdf) linked in Keras documentation.
 
 ## Data Generation & Collection
 
