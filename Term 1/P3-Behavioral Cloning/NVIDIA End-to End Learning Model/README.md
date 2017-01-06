@@ -3,7 +3,7 @@
 
 ## Convolutional Neural Network Architecture
 
-I designed a CNN based on the NVidia example, which has been able to successfully steer a real-world self-driving car cwithout human intervention more than 90% of the time in recent tests under all sorts of road conditions. The model consists of an initial layer which subsamples the 320x160 image to produce a 64x32 image, in order to decrease the input size without losing features of the image (road boundaries, horizon, etc.). Then, several 2D convolutional layers with 2x2 max pooling and increasing filter depth are used, to reduce the image dimensions while simultaneously provide a larger semantic depth. The goal for these initial layers is to recognize small patterns- line segments are various locations, and with various slopes, etc.  There are two additional convolutional layers without striding to allow for recognition of more complex features in the images. 
+CNN based on the NVidia example, which has been able to successfully steer a real-world self-driving car cwithout human intervention more than 90% of the time in recent tests under all sorts of road conditions. The model consists of an initial layer which subsamples the 320x160 image to produce a 64x32 image, in order to decrease the input size without losing features of the image (road boundaries, horizon, etc.). Then, several 2D convolutional layers with 2x2 max pooling and increasing filter depth are used, to reduce the image dimensions while simultaneously provide a larger semantic depth. The goal for these initial layers is to recognize small patterns- line segments are various locations, and with various slopes, etc.  There are two additional convolutional layers without striding to allow for recognition of more complex features in the images. 
 
 Then there is a flattening layer, which allows the 3D output of a conv filter to be turned into a 1D vector to be fed into a traditional neural network to identify the desired steering angle for the image. These hidden layers have widths of 1164, 100, 50, 10 and finally the output layer, which consists of one neuron.
 
@@ -41,9 +41,9 @@ The complete architecture of the model is summarized in this table:
 
 The training data for the model was obtained by using a driving simulator provided by Udacity. The simulator records the steering angle controlled by the human user as a car on the screen maneuvers around a track. Care needs to be taken to ensure that valid data is obtained- there can be no crashes, etc. After experimentation, I determined that the best dataset would include careful centerline driving- one lap clockwise, and one lap counterclockwise, and one lap each of shoulder recovery driving from the right to the center, and from the left to the center. 
 
-I initially considered obtaining additional data at various trouble spots (sharp left hand turns, where a confounding dirt road proceeds straight, and a sharp right turn in a track consisting almost exclusively of left hand turns), but in the end decided that these extra datapoints might possibly contaminate the weights of the model. Interestingly, I tried adding training data (images and steering angle) for one particularly hard section by repeating the same section 4 times, but the model would still fail there, with the car swerving off the road. I decided to instead focus on improving the robustness of the model itself. One of the main helpful things added here was the recent idea of batch normalization after each layer. This seemed to significantly increase the robustness of the driving model.
+Initially considered obtaining additional data at various trouble spots (sharp left hand turns, where a confounding dirt road proceeds straight, and a sharp right turn in a track consisting almost exclusively of left hand turns), but in the end decided that these extra datapoints might possibly contaminate the weights of the model. Interestingly, I tried adding training data (images and steering angle) for one particularly hard section by repeating the same section 4 times, but the model would still fail there, with the car swerving off the road. I decided to instead focus on improving the robustness of the model itself. One of the main helpful things added here was the recent idea of batch normalization after each layer. This seemed to significantly increase the robustness of the driving model.
 
-I experimented with various enhancements of the dataset. For example, I tried flipping the images left-right and using -1 * steering_angle for additional training examples. I also tried using the provided left and right camera images and adjusted the measured steering angle by adding or subtracting a fixed value to accomodate the larger steering correction needed if the center camera had the same view as one of these side cameras. However, in the end, I ended up not using these generated samples. They made the training process much slower (by a factor of 2 or 3), and seemed to not help when testing the performance of the model on the track.
+Experimented with various enhancements of the dataset. For example, I tried flipping the images left-right and using -1 * steering_angle for additional training examples. I also tried using the provided left and right camera images and adjusted the measured steering angle by adding or subtracting a fixed value to accomodate the larger steering correction needed if the center camera had the same view as one of these side cameras. However, in the end, I ended up not using these generated samples. They made the training process much slower (by a factor of 2 or 3), and seemed to not help when testing the performance of the model on the track.
 
 The pixel values were normalized with a linear transform from integers in the range 0-255 to real numbers -1.0 to +1.0. The drive.py script was edited to perform this same normalization on the images used to calculate steering angle during simulation.
 
@@ -72,10 +72,6 @@ print(image_files[2])
 ```
 
     Images in training set:  6903
-    /Users/sdesoto/Documents/MyDocuments/udacity/sdc/lesson14_behavior_cloning/IMG/center_2016_12_06_14_40_41_448.jpg
-    /Users/sdesoto/Documents/MyDocuments/udacity/sdc/lesson14_behavior_cloning/IMG/right_2016_12_06_14_40_41_448.jpg
-    /Users/sdesoto/Documents/MyDocuments/udacity/sdc/lesson14_behavior_cloning/IMG/left_2016_12_06_14_40_41_448.jpg
-     
 
 
 ### Images from center, right and left cameras
@@ -92,15 +88,15 @@ for img_file in image_files[0:3]:
 ```
 
 
-![png](output_6_0.png)
+![png](1.png)
 
 
 
-![png](output_6_1.png)
+![png](2.png)
 
 
 
-![png](output_6_2.png)
+![png](3.png)
 
 
 ## Training the Model
