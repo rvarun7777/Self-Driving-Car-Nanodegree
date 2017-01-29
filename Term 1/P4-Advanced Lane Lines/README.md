@@ -50,7 +50,11 @@ Function `calibrate_camera` in cells `In [2]` and `In [3]` of the Jupyter notebo
 
 The camera matrix and distortion coefficients obtained in the previous steps were used to correct distortion in each frame of the video. An example is given below:
 
-![Undistortion Road Example](output_images/undistortion-road.png)
+![Undistortion Road Example](output_images/undistorted.png)
+![Undistortion Road Example](output_images/undistorted-1.png)
+![Undistortion Road Example](output_images/undistorted-2.png)
+![Undistortion Road Example](output_images/undistorted-3.png)
+
 
 ##### 2. Creation of Thresholded Binary Image
 
