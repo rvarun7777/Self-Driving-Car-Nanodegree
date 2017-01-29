@@ -174,9 +174,9 @@ The code for the pipeline which calls each of the above functions can be found i
 
 ## Pipeline (Video)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/WOMX91UvrSE" frameborder="0" allowfullscreen></iframe>
-
 The final video can be found in the project folder
+
+Here's a [link to my video result][video1]
 
 ## Discussion
 
