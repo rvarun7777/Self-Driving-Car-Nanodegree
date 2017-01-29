@@ -178,7 +178,7 @@ The final video can be found in the project folder
 
 | **Project Video** | **Challenge Video** |
 |-----|-----|
-|![Project Video](videos/proc_project_video.gif)]|![Challenge Video](videos/proc_challenge_video.gif)]|
+|![Project Video](videos/proc_project_video.gif)]|![Challenge Video](videos/proc_challenge_video.gif)|
 
 
 ## Discussion
