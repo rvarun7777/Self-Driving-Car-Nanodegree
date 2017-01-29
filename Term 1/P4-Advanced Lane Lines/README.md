@@ -53,7 +53,6 @@ The camera matrix and distortion coefficients obtained in the previous steps wer
 ![Undistortion Road Example](output_images/undistorted.png)
 ![Undistortion Road Example](output_images/undistorted-1.png)
 ![Undistortion Road Example](output_images/undistorted-2.png)
-![Undistortion Road Example](output_images/undistorted-3.png)
 
 
 ##### 2. Creation of Thresholded Binary Image
