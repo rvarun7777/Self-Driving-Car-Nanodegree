@@ -174,11 +174,11 @@ The code for the pipeline which calls each of the above functions can be found i
 
 ## Pipeline (Video)
 
-The final video can be found in the project folder
+The final video can be found in the project folder and below
 
 | **Project Video** | **Challenge Video** |
 |-----|-----|
-|![Project Video](videos/proc_project_video.gif)]|![Challenge Video](videos/proc_challenge_video.gif)|
+|![Project Video](videos/proc_project_video.gif)|![Challenge Video](videos/proc_challenge_video.gif)|
 
 
 ## Discussion
