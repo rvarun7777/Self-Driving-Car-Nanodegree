@@ -1,143 +1,191 @@
-##Advanced Lane Finding Project
+## Advanced Lane Finding
+[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
-The goals / steps of this project are the following:
+The goals / steps of this project are the following:  
 
 * Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
-* Apply a distortion correction to raw images.
+* Apply the distortion correction to the raw image.  
 * Use color transforms, gradients, etc., to create a thresholded binary image.
-* Apply a perspective transform to rectify binary image ("birds-eye view").
-* Detect lane pixels and fit to find the lane boundary.
-* Determine the curvature of the lane and vehicle position with respect to center.
+* Apply a perspective transform to rectify binary image ("birds-eye view"). 
+* Detect lane pixels and fit to find lane boundary.
+* Determine curvature of the lane and vehicle position with respect to center.
 * Warp the detected lane boundaries back onto the original image.
 * Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 
-[//]: # (Image References)
 
-[image1]: ./example_images/undistorted1.png "Undistorted1"
-[image2]: ./example_images/undistorted2.png "Undistorted2"
-[image3]: ./example_images/undistorted3.png "Undistorted3"
-[image4]: ./example_images/undistorted4.png "Undistorted4"
-[image5]: ./example_images/undistorted5.png "Undistorted5"
-[image6]: ./example_images/undistorted6.png "Undistorted6"
-[image7]: ./example_images/undistorted7.png "Undistorted7"
-[image8]: ./example_images/undistorted8.png "Undistorted8"
-[image9]: ./test_images/test1.jpg "Test1"
-[image10]: ./example_images/threshold1.png "Threshold1"
-[image11]: ./example_images/transform1.png "Transform1"
-[image12]: ./example_images/transform2.png "Transform2"
-[image13]: ./example_images/linefit1.png "Linefit1"
-[image14]: ./example_images/linefit2.png "Linefit2"
-[image15]: ./example_images/final1.png "Final1"
-[image16]: ./example_images/final2.png "Final2"
-[image17]: ./example_images/final3.png "Final3"
-[image18]: ./example_images/final4.png "Final4"
-[image19]: ./example_images/final5.png "Final5"
-[image20]: ./example_images/final6.png "Final6"
-[video1]: ./videos/proc_project_video.mp4 "Video"
+## Student Instructions
 
-## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
-###Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
+The images for camera calibration are stored in the folder called `camera_cal`.  The images in `test_images` are for testing your pipeline on single frames.  To help the reviewer examine your work, please save examples of the output from each stage of your pipeline in the folder called `ouput_images`, and include a description in the README for the project of what each image shows.    The video called `project_video.mp4` is the video your pipeline should work well on.  
 
----
-###Writeup / README
+The `challenge_video.mp4` video is an extra (and optional) challenge for you if you want to test your pipeline under somewhat trickier conditions.  The `harder_challenge.mp4` video is another optional challenge and is brutal!
 
-####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Advanced-Lane-Lines/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.  
+If you're feeling ambitious (again, totally optional though), don't stop there!  We encourage you to go out and take video of your own, calibrate your camera and show us how you would implement this project from scratch!
 
-You're reading it!
 
-###Camera Calibration
+## Rubric Points
+Here I will consider the rubric points individually and describe how I addressed each point in my implementation.
 
-####1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
+### 1. Camera Calibration
 
-The code for this step is defined in the `camera_calibration` function contained in the second code cell of the [IPython notebook](./P4.ipynb).  
+##### Code Location
 
-I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection. I start with `9 corners` in `x-axis` and `6 corners` in `y-axis`. However, some of the calibration images only show a portion of the whole image and the we couldn't find `9` and `6` corners from them. As a result, I add a logic to search for fewer corners (e.g., `8 and 6`, `9 and 5`, etc.) once we couldn't detect corners from the original numbers. In this way, I'm able to find all the corners from the calibration images and able to use all of them for calibration.
+Function `calibrate_camera` in cells `In [2]` and `In [3]` of the Jupyter notebook
 
-I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result: 
+##### Process
 
-![alt text][image1]
-![alt text][image2]
+1. Count the number of inner `corners` per row and column
+2. Prepare a list of `object points` from these corners, which will be the same for all images in the set of calibration images
+3. For each image in the set of calibration images:
+    1. Find the image chess corners using opencv function `findChessboardCorners`
+    2. Append object points(same for all images) and image points to different lists
+4. 	The camera is calibrated using opencv function `calibrateCamera` using the object points and image points obtained above to obtain the distortion coefficients and camera coefficient matrix.
 
-The calibration result is saved as a `pickle` for future uses.
+##### Example on calibration image
+![Undistortion Chessboard Example](output_images/undistortion-chess.png)
 
-###Pipeline (single images)
 
-####1. Provide an example of a distortion-corrected image.
-The comparison between the test images and their undistorted images are shown below. Although it is pretty hard to tell the differences from naked eyes.
+## Pipeline (Single Images)
 
-![alt text][image3]
-![alt text][image4]
-![alt text][image5]
-![alt text][image6]
-![alt text][image7]
-![alt text][image8]
+##### 1. Distortion Correction
 
-To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
-![alt text][image9]
+The camera matrix and distortion coefficients obtained in the previous steps were used to correct distortion in each frame of the video. An example is given below:
 
-####2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps are under `4` in the [IPython notebook](./P4.ipynb).  The thresholds include:
+![Undistortion Road Example](output_images/undistortion-road.png)
 
- 1. `Sobel` on `x` direction
- 2. `Yellow` and `white` color detection from `RGB`
- 3. `Yellow` and `white` color detection from `HSV`
- 4. `Yellow` and `white` color detection from `HLS`
- 5. `S channel` from `HLS`
+##### 2. Creation of Thresholded Binary Image
 
-A lot of credits are given to the community on `Slack` for the various ideas. The numbers for the thresholds are all hard-coded for now. A more robust approach will be explored later. Here's an example of my output for this step of the test image:
+There are several functions in my code that do different kinds of thresholding:
 
-![alt text][image10]
+1. `get_grayscale_thresholded_img` in cell `In [10]` converts to grayscale using the cv2 `cvtColor` function and performs thresholding using the `thresh` parameter.
 
-####3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
+2. `get_sobel_binary` in cell `In [12]` converts the image to grayscale, applies a sobel operator in the X direction, takes the absolute value, scales the result in the range 0-255 and performs a thresholding operation.
 
-The code for my perspective transform is located under `3` in the [IPython notebook](./P4.ipynb). The `PerspectiveTransform()` function uses hard-coded pixel locations for both the original and new images and calculates the `M` and `Minv` matrices for perspective transform. Then, the `M` matrix is used by `cv2.warpPerspective` to convert the original image to its bird's view, while `Minv` is used to do transform in the opposite direction. Here's an example of my output for this step of the test image:
+3. `get_hls_channel_binary` in cell `In [15]` performs thresholding on either the H, L or S channel of the image depending on the input parameter.
 
-![alt text][image11]
+4. `get_color_selection` in cell `In [17]` performs color selection on the image converted to HLS color space by only selecting Yellow and White colors and returns the binary mask for the same.
 
-And an example of a transformed image after thresholding is:
+5. `get_binary_image` in cell `In [19]` combines the above operations to produce a binary image of the input image.
 
-![alt text][image12]
+An example of the result of calling `get_binary_image` on an image is shown below:
 
-####4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
+![Binary Image](output_images/binary.png)
 
-The code for my line detection is located under `5` in the [IPython notebook](./P4.ipynb). I use a histogram to find the locations of the maximum pixels along the `y-axis` and assume those are the locations of the points on the line. A `RejectOutlier` function is used to compare the `x-axis` value of all the points to their median value and reject the ones who are far away from the median. Last, a 2nd order polynomial is used to fit the lane lines such as:
+##### 3. Region of Interest Selection
 
-![alt text][image13]
+1. `select_region_of_interest` in cell `In [21]` performs a region of selection by  choosing the four points bounding a region using the image dimensions:
 
-####5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
+![Region of interest selection](output_images/roi.png)
 
-The calculation of the radius of curvature of the line is obtained from the lecture. The vehicle position is determined by calculating the average `x coordinate` of the bottom left and bottom right points of the lines and comparing it with the middle point of the `x-axis`(i.e., 640). The deviation is then converted from pixels to meters. If the deviation is postive, vehicle is to the right of the center. If the deviation is negative, vehicle is to the left of the center. An example is shown as below:
+##### 4. Perspective Transform
 
-![alt text][image14]
+1. One of the test images were picked
+2. Hough lines were drawn on the test image
+3. The end points of the hough lines were used as the `src` points in the perspective transform
+4. A rectangle derived from the src points was used as the `dst` points in the hough transform.
+5. The transformation matrix was calculated using the opencv function `getPerspectiveTransform`
+6. The relevant code can be seen in the cells `In [32]`, `In [33]` and `In [34]`. A snippet is shown below:
 
-####6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
-The implementation of the whole pipeline is located under `6` in the [IPython notebook](./P4.ipynb). Below are the final images for all six test images:
+```
+   # Determine the original and destination points based on the hough lines
+    line1, line2 = lines
+    
+    # Top Right, # Bottom Right, # Top left, # Bottom left
+    original_img_pts = [[line1[0], line1[1]], [line1[2], line1[3]], [line2[0], line2[1]], [line2[2], line2[3]]]
+    
+    destination_pts = [[line1[2], y_limit], [line1[2], line1[3]], [line2[2], y_limit], [line2[2], line2[3]]]
+    
+    # Define calibration box in source(original) and destination(warped/desired) image
+    
+    image_shape = (image.shape[1], image.shape[0])
+    
+    # Four source coordinates
+    src = np.float32(original_img_pts)
+    
+    # Four desired points 
+    dst = np.float32(destination_pts)
+    
+    # Compute the perspective transformation matrix
+    M = cv2.getPerspectiveTransform(src, dst)
+```
 
-![alt text][image15]
-![alt text][image16]
-![alt text][image17]
-![alt text][image18]
-![alt text][image19]
-![alt text][image20]
+![Perspective Transform](output_images/perspective_transform.png)
 
----
+##### 5. Finding Lane Pixels and fitting with a Polynomial
 
-###Pipeline (video)
+1. First a histogram is used over the lower half of the image to find the peaks and hence the base of the two lane lines.
+From the below image, it can be seen that the base of the lane lines are at x positions 200 and 1100 for the left and right lane lines resprctively.
 
-####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
+The code for this can be found in the function `get_lane_lines_base` in cell `In [35]`
+![Perspective Transform](output_images/histogram.png)
 
-Here's a [link to my video result][video1]
+2. Starting at the base of each line, a sliding window is used to find the pixels belonging to that lane line. This technique is used for both the left and the right lane lines.
 
----
+The indices (x,y) of the pixels of the left and right lane lines are returned by the function `get_lane_pixels` in the code cell `In [37]`
 
-###Discussion
+3. Using the pixel positions of the left and right lane lines, a curve is fit to each of the left and right lane line pixels using the function `get_curved_lane_line` in the code cell `In [38]`. The numpy function `polyfit` is used to fit the curve.
 
-####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+The curved lane lines are drawn on the image using the function `draw_curved_line` in the code cell `In [39]`. The opencv function `polylines` is used to draw the curved lines.
 
-My main issue is that I haven't got enough time to work on this project. Work has been very busy at my company recently. Below are the improvements I will try to make once I have more time:
-   
- 1. Modularize the whole thing and convert the notebook to `py` files.
- 2. Get rid of the hard-coded numbers as much as possible and make the code robust.
- 3. Implement a class for the lines and use it to get temporal information from the videos to better smooth the lines.
- 4. Tackle the challenge videos.
- 5. Look back to Project 1 and try to find functions from there to help this project.
+Below, the red pixels correspond to the left lane line, the blue pixels correspond to the right lane line, and the green lines are the curves fit to these pixel positions using `np.polyfit`
+
+![Perspective Transform](output_images/polynomial.png)
+
+##### 6. Calculation of Radius of Curvature and Distance off the Center
+
+The radius of curvature is calculated in cell `In [40]`. Below is a code snippet of the same:
+
+```
+y, x = pixels
+    
+    # Define conversions in x and y from pixels space to meters
+    ym_per_pix = 30/image.shape[1] # meters per pixel in y dimension
+    xm_per_pix = 3.7/700 # meteres per pixel in x dimension
+    
+    y_eval = np.max(y)
+
+    fit = np.polyfit(y*ym_per_pix, x*xm_per_pix, 2)
+    
+    return int(((1 + (2*fit[0]*y_eval + fit[1])**2)**1.5) \
+                             /np.absolute(2*fit[0]))
+```
+
+The distance off the center is calculated in `In [41]`. Below is a code snippet of the same.
+
+```
+xm_per_pix = 3.7/700 # meteres per pixel in x dimension
+    
+    image_center = (image.shape[1]/2, image.shape[0])
+    
+    car_middle_pixel = int((left_base[0] + right_base[0])/2)
+    
+    return float("{0:.2f}".format((car_middle_pixel - image_center[0]) * xm_per_pix))
+```
+
+##### 7. An example image of your result plotted back down onto the road 
+
+1. The distorted lane lines are warped back onto the original image using the inverse tranformation matrix `M_inv`
+2. This image is overlapped with the original image using the function `final = weighted_img(lane_lines, image)`.
+
+An example of the final image can be found below:
+
+![Final](output_images/final.png)
+
+The code for the pipeline which calls each of the above functions can be found in cell `In [43]` in function `process_image`
+
+## Pipeline (Video)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/WOMX91UvrSE" frameborder="0" allowfullscreen></iframe>
+
+The final video can be found in the project folder
+
+## Discussion
+
+##### Problems/Issues faced
+1. Programmatically finding the source and destination points for the perspective transform was challenging. I finally decided to use hough lines for the same.
+2. Shadows were throwing off my lane lines initially. I had to use HLS color thresholding to prevent this.
+
+##### Places where pipeline is likely to fail
+1. The pipeline does alright on the first challenge video, but because the lane lines are much lighter than the first video, the result is a little more wobbly.
+
+##### Plans to make pipeline more robust
+1. I will improve the method of selection of lane line pixels so that even if the lane lines are light, they will still get picked up.
