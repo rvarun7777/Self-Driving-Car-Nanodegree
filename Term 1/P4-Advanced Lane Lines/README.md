@@ -176,7 +176,7 @@ The code for the pipeline which calls each of the above functions can be found i
 
 The final video can be found in the project folder
 
-Here's a [link to my video result][video1]
+Here's a [link to my video result](https://github.com/rvarun7777/Self-Driving-Car-Nanodegree/blob/master/Term%201/P4-Advanced%20Lane%20Lines/videos/proc_project_videop4.mp4)
 
 ## Discussion
 
