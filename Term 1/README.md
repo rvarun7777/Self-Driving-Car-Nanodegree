@@ -1,5 +1,7 @@
 # Self Driving Car Engineer
 
+![ScreenShot](Term1_Complete.PNG)
+
 ![ScreenShot](Term1.PNG)
 
 This repository contains all the projects which have been completed by me for the Self Driving Car Nanodegree offered by [Udacity](https://www.udacity.com). The [curriculum](https://medium.com/self-driving-cars/term-1-in-depth-on-udacitys-self-driving-car-curriculum-ffcf46af0c08#.nglkprlow) of this program consists of three terms over nine months. This repository will be updated accordingly. 
@@ -18,5 +20,5 @@ This repository contains all the projects which have been completed by me for th
 4 | [Advanced Lane Finding](P4_Advanced_Lane_Lines/) | [Python] (P4_Advanced_Lane_Lines/P4.ipynb) |[Camera Calibration](http://docs.opencv.org/2.4/doc/tutorials/calib3d/camera_calibration/camera_calibration.html), [Perspective Transformation](http://docs.opencv.org/2.4/modules/imgproc/doc/geometric_transformations.html), [Sobel Operator](http://docs.opencv.org/2.4/doc/tutorials/imgproc/imgtrans/sobel_derivatives/sobel_derivatives.html), [Color Conversion](http://docs.opencv.org/3.1.0/de/d25/imgproc_color_conversions.html), [Image Thresholding](http://docs.opencv.org/trunk/d7/d4d/tutorial_py_thresholding.html) | [OpenCV](http://opencv.org/) | [Images](P4_Advanced_Lane_Lines/test_images/), [Videos](P4_Advanced_Lane_Lines/videos/)
 5 | [Vehicle Detection](P5_Vehicle_Detection/) | [Python](P5_Vehicle_Detection/P5_Vehicle_Detection.ipynb) | [Template Matching](http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_template_matching/py_template_matching.html), [Color Histogram](http://docs.opencv.org/trunk/d1/db7/tutorial_py_histogram_begins.html), [HOG](http://scikit-image.org/docs/dev/auto_examples/plot_hog.html), [LinearSVC](http://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html), [Heatmap](https://en.wikipedia.org/wiki/Heat_map) |  [OpenCV](http://opencv.org/), [Scikit-Learn](http://scikit-learn.org/), [Skimage](http://scikit-image.org/docs/dev/api/skimage.html), [Scipy](https://www.scipy.org/), [MoviePy](http://zulko.github.io/moviepy/) | [Images](P5_Vehicle_Detection/test_images/), [Video](P5_Vehicle_Detection/project_video.mp4)
 
-![ScreenShot](Term1_Complete.PNG)
+
 
